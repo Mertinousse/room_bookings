@@ -1,0 +1,10 @@
+<% if obj.errors.any? %>
+
+  <p> <%= pluralize(obj.errors.count, "error") %> </p>
+  <ul>
+    <% obj.errors.full_messages.each do |e| %>
+      <li><%= e %></li>
+    <% end %>
+  </ul>
+
+<% end %>

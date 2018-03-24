@@ -1,0 +1,15 @@
+
+<%= render "shared/errors", obj: @booking %>
+
+<%= form_for @booking do |b| %>
+  <%= b.label :room %>
+  <%= b.text_field :room %>
+
+  <%= b.label :start %>
+  <%= b.date_field :start %>
+
+  <%= b.label :end %>
+  <%= b.date_field :end %>
+
+  <%= b.submit %>
+<% end %>

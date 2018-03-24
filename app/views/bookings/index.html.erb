@@ -1,1 +1,10 @@
 <h1>index</h1>
+
+<% @bookings.each do |b| %>
+
+  <p>room: <%=b.room%></p>
+  <p>start date: <%=b.start%></p>
+  <p>end date: <%=b.end%></p>
+  <hr>
+
+<% end %>
