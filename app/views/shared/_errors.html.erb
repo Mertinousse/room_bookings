@@ -1,10 +1,24 @@
 <% if obj.errors.any? %>
 
-  <p> <%= pluralize(obj.errors.count, "error") %> </p>
-  <ul>
-    <% obj.errors.full_messages.each do |e| %>
-      <li><%= e %></li>
-    <% end %>
-  </ul>
+<div class="row justify-content-center">
+<div class="col-sm-10 col-lg-8">
+
+<div class="card border-danger mb-4">
+
+  <!-- <div class="card-header">
+    <%= pluralize(obj.errors.count, "error") %>
+  </div> -->
+  <div class="card-body text-danger">
+    <ul>
+      <% obj.errors.full_messages.each do |e| %>
+        <li class="card-text"><%= e %></li>
+      <% end %>
+    </ul>
+  </div>
+
+</div>
+
+</div>
+</div>
 
 <% end %>

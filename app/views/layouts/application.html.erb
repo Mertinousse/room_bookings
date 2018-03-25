@@ -9,8 +9,16 @@
   </head>
 
   <body>
-    <%= render "layouts/messages" %>
-    <%= yield %>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1>Booking Application</h1>
+      </div>
+    </div>
+
+    <div class="container">
+      <%= render "layouts/messages" %>
+      <%= yield %>
+    </div>
   </body>
 
   <!-- <%= debug(params) if Rails.env.development? %> -->
