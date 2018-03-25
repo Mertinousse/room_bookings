@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   root "bookings#index"
   post "api", to: "api#info"
 
-  resources :bookings, except: [ :edit, :show, :update ]
+  resources :bookings, except: [ :show ]
 
 end

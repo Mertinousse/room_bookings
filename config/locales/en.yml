@@ -35,3 +35,5 @@ en:
       invalid_date: "is not a valid date"
       after: "must be after %{restriction}"
       on_or_after: "must be on or after %{restriction}"
+      before: "must be before %{restriction}"
+      on_or_before: "must be on or before %{restriction}"

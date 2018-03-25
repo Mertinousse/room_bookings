@@ -1,13 +1,15 @@
 class BookingsController < ApplicationController
 
+  before_action :set_booking, only: [ :destroy, :update, :edit ]
+
   def index
     @bookings = Booking.all
   end
 
   def create
-    @booking = Booking.new(params.require(:booking).permit(:room, :start, :end))
+    @booking = Booking.new(booking_params)
     if @booking.save
-      flash[:success] = "Booking created for room #{@booking.room}"
+      flash[:success] = "Booking has been created for room #{@booking.room}"
       redirect_to bookings_path
     else
       render "new"
@@ -18,8 +20,31 @@ class BookingsController < ApplicationController
     @booking = Booking.new
   end
 
-  def destroy
+  def edit
+  end
 
+  def update
+    if @booking.update(booking_params)
+      flash[:success] = "Booking has been updated for room #{@booking.room}"
+      redirect_to bookings_path
+    else
+      render "edit"
+    end
+  end
+
+  def destroy
+    @booking.destroy
+    flash[:danger] = "Booking has been successfully deleted"
+    redirect_to bookings_path
+  end
+
+  private
+  def booking_params
+    params.require(:booking).permit(:room, :start, :end)
+  end
+
+  def set_booking
+    @booking = Booking.find(params[:id])
   end
 
 end

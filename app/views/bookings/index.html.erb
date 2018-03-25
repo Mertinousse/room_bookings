@@ -2,9 +2,13 @@
 
 <% @bookings.each do |b| %>
 
+  <p>id: <%=b.id%></p>
   <p>room: <%=b.room%></p>
   <p>start date: <%=b.start%></p>
   <p>end date: <%=b.end%></p>
+  <%= link_to "edit", edit_booking_path(b) %>
+  <%= link_to "delete", booking_path(b), method: :delete,
+      data: { confirm: "Are you sure you want to delete this booking?" } %>
   <hr>
 
 <% end %>
