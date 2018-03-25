@@ -3,7 +3,7 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [ :destroy, :update, :edit ]
 
   def index
-    @bookings = Booking.all
+    @bookings = Booking.all.sort_by &:start
   end
 
   def create
