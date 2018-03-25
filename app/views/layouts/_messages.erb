@@ -1,5 +1,13 @@
+<div class="row">
+
+<div class="col-sm-12 col-md-10">
 
 <% flash.each do |name, msg| %>
-  <!-- TODO: msg name -->
-  <p> <%= msg if msg.is_a?(String) %> </p>
+  <div class='alert alert-<%="#{name}"%>'>
+    <a href="#" class="close" data-dismiss="alert">&#215;</a>
+    <p> <%= msg if msg.is_a?(String) %> </p>
+  </div>
 <% end %>
+
+</div>
+</div>
