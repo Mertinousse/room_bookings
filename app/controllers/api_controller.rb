@@ -4,6 +4,8 @@ class ApiController < ApplicationController
 
   def info
     data = params.require(:booking).permit(:room, :date)
+    puts data
+    putc schema
     if JSON::Validator.validate(@@schema, data, { :strict => true, :parse_data => false })
       data[:date] = Date.parse(data[:date])
       @resp = { :booked => false }
