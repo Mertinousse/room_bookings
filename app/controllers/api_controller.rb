@@ -2,6 +2,24 @@ class ApiController < ApplicationController
 
   skip_before_action :verify_authenticity_token
 
+  @@schema = {
+    "type" => "object",
+    "required" => ["booking"],
+    "properties" => {
+      "booking" => {
+        "type" => "object",
+        "properties" => {
+          "room" => {
+            "type" => "string"
+          },
+          "date" => {
+            "type" => "string"
+          }
+        }
+      }
+    }
+  }
+
   def info
     data = params.require(:booking).permit(:room, :date)
     if JSON::Validator.validate(@@schema, data)
@@ -18,22 +36,5 @@ class ApiController < ApplicationController
     end
     render :json => @resp
   end
-
-  @@schema = {
-    "type" => "object",
-    "properties" => {
-      "booking" => {
-        "type" => "object",
-        "properties" => {
-          "room" => {
-            "type" => "string"
-          },
-          "date" => {
-            "type" => "string"
-          }
-        }
-      }
-    }
-  }
 
 end
