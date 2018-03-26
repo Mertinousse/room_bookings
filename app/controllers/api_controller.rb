@@ -4,9 +4,7 @@ class ApiController < ApplicationController
 
   def info
     data = params.require(:booking).permit(:room, :date)
-    puts data
-    puts @@schema
-    if JSON::Validator.validate(@@schema, data, { :strict => true, :parse_data => false })
+    if data.has_key? :room and data.has_key? :date
       data[:date] = Date.parse(data[:date])
       @resp = { :booked => false }
       Booking.all.each do |b|
@@ -20,22 +18,5 @@ class ApiController < ApplicationController
     end
     render :json => @resp
   end
-
-  @@schema = {
-    "type" => "object",
-    "properties" => {
-      "booking" => {
-        "type" => "object",
-        "properties" => {
-          "room" => {
-            "type" => "string"
-          },
-          "date" => {
-            "type" => "string"
-          }
-        }
-      }
-    }
-  }
 
 end
