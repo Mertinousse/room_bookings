@@ -21,7 +21,7 @@ class ApiController < ApplicationController
       }
     }
     data = params.require(:booking).permit(:room, :date)
-    if JSON::Validator.validate(@@schema, data)
+    if JSON::Validator.validate(@schema, data)
       data[:date] = Date.parse(data[:date])
       @resp = { :booked => false }
       Booking.all.each do |b|
