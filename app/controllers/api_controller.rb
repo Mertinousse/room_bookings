@@ -3,25 +3,8 @@ class ApiController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def info
-    @schema = {
-      "type" => "object",
-      "required" => ["booking"],
-      "properties" => {
-        "booking" => {
-          "type" => "object",
-          "properties" => {
-            "room" => {
-              "type" => "string"
-            },
-            "date" => {
-              "type" => "string"
-            }
-          }
-        }
-      }
-    }
     data = params.require(:booking).permit(:room, :date)
-    if JSON::Validator.validate(@schema, data)
+    if JSON::Validator.validate(@@schema, data, { :strict => true, :parse_data => false })
       data[:date] = Date.parse(data[:date])
       @resp = { :booked => false }
       Booking.all.each do |b|
@@ -35,5 +18,22 @@ class ApiController < ApplicationController
     end
     render :json => @resp
   end
+
+  @@schema = {
+    "type" => "object",
+    "properties" => {
+      "booking" => {
+        "type" => "object",
+        "properties" => {
+          "room" => {
+            "type" => "string"
+          },
+          "date" => {
+            "type" => "string"
+          }
+        }
+      }
+    }
+  }
 
 end
