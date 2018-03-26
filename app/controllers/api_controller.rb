@@ -21,7 +21,6 @@ class ApiController < ApplicationController
 
   @@schema = {
     "type" => "object",
-    "required" => ["booking"],
     "properties" => {
       "booking" => {
         "type" => "object",
