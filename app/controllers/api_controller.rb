@@ -4,7 +4,7 @@ class ApiController < ApplicationController
 
   def info
     data = params.require(:booking).permit(:room, :date)
-    render :text => "ERROR: JSON validation failed" if !JSON::Validator.validate(@@schema, data)
+    render :json => { "error" => "JSON validation failed" } if !JSON::Validator.validate(@@schema, data)
     data[:date] = Date.parse(data[:date])
     resp = { :booked => false }
     Booking.all.each do |b|
