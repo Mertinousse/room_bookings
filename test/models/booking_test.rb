@@ -5,4 +5,9 @@ class BookingTest < ActiveSupport::TestCase
     booking = Booking.new
     assert_not booking.save
   end
+
+  test "should save valid booking record" do
+    booking = Booking.new(room: "001", start: Date.today, end: Date.today + 1)
+    assert booking.save
+  end
 end
