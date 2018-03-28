@@ -9,7 +9,7 @@ class ApiControllerTest < ActionDispatch::IntegrationTest
 
   test "should get booking response" do
     post api_path, params: { "booking" => { "room" => "001", "date" => "01-01-2018" } }, as: :json
-    puts @response.body
-    assert_not_nil (JSON.parse(@response.body)).booked
+    puts @response.body[:booked]
+    assert_not_nil (JSON.parse(@response.body))[:booked]
   end
 end
