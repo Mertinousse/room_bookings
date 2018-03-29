@@ -31,7 +31,7 @@ class Booking < ActiveRecord::Base
     #     break
     #   end
     # end
-    existing_booking = Booking.find_by("id != ?", self.id, room: self.room, "end > ?", self.start, "start < ?", self.end)
+    existing_booking = Booking.find_by("id != ? AND end > ? AND start < ?", self.id, room: self.room, self.start, self.end)
     errors[:base] << "The room is already booked during this time" if existing_booking
   end
 
