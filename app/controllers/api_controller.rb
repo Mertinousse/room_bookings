@@ -25,7 +25,7 @@ class ApiController < ApplicationController
     rescue ActionController::ParameterMissing => e
       return false
     end
-    return @data.has_key? :room and @data.has_key? :date
+    return (@data.has_key? :room and @data.has_key? :date)
   end
 
 end
