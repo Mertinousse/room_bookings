@@ -3,7 +3,7 @@ class ApiController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def info
-    if request_valid? then
+    if request_valid?
       @data[:date] = Date.parse(@data[:date])
       @res = { :booked => false }
       Booking.all.each do |b|
