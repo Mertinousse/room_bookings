@@ -29,6 +29,7 @@ class Booking < ActiveRecord::Base
       if (self.start <=> b[:end]) < 0 and (self.end <=> b[:start]) > 0
         errors[:base] << "The room is already booked during this time"
         break
+      end
     end
   end
 
