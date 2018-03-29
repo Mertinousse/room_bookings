@@ -3,7 +3,7 @@ class ApiController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def info
-    booking = Booking.new(params)
+    booking = Booking.new(params.require(:booking).permit(:room, :date))
     # if booking_present? and @data.has_key? :room and @data.has_key? :date
     if booking.valid?
       # @data[:date] = Date.parse(@data[:date])
@@ -21,14 +21,14 @@ class ApiController < ApplicationController
     render :json => @res
   end
 
-  private
-  def booking_present?
-    begin
-      @data = params.require(:booking).permit(:room, :date)
-    rescue ActionController::ParameterMissing => e
-      return false
-    end
-    return true
-  end
+  # private
+  # def booking_present?
+  #   begin
+  #     @data = params.require(:booking).permit(:room, :date)
+  #   rescue ActionController::ParameterMissing => e
+  #     return false
+  #   end
+  #   return true
+  # end
 
 end
