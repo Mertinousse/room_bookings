@@ -28,7 +28,12 @@ class ApiController < ApplicationController
     rescue ActionController::ParameterMissing => e
       return false
     end
-    return (@data.has_key? :room and @data.has_key? :date)
+    if (@data.has_key? :room and @data.has_key? :date)
+      room = Room.new(number: @data[:room])
+      d, m, y = @data[:date].split '-'
+      return true if Date.valid_date? y.to_i, m.to_i, d.to_i and room.valid?
+    end
+    return false
   end
 
 end
