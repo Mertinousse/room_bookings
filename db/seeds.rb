@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+for i in 0..3
+  for j in 0..2
+    for k in 1..9
+      Room.create(number: "#{i}#{j}#{k}")
+    end
+  end
+end

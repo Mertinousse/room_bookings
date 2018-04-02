@@ -8,6 +8,7 @@ class BookingsController < ApplicationController
 
   def create
     @booking = Booking.new(booking_params)
+    @booking.room = Room.find(params[:booking][:room][:room_id])
     if @booking.save
       flash[:success] = "Booking has been created for room #{@booking.room}"
       redirect_to bookings_path
@@ -18,6 +19,7 @@ class BookingsController < ApplicationController
 
   def new
     @booking = Booking.new
+    @rooms = Room.all
   end
 
   def edit
@@ -40,7 +42,7 @@ class BookingsController < ApplicationController
 
   private
   def booking_params
-    params.require(:booking).permit(:room, :start, :end)
+    params.require(:booking).permit(:start, :end)
   end
 
   def set_booking
