@@ -1,4 +1,4 @@
-require 'pp'
+# require 'pp'
 # class BookingValidator < ActiveModel::Validator
 #
 #   def validate(record)
@@ -25,18 +25,8 @@ class Booking < ActiveRecord::Base
   validate :check_date_conflict
 
   def check_date_conflict
-    # Booking.where(room: self.room).find_each(batch_size: 100) do |b|
-    #   next if b[:id] == self.id
-    #   if (self.start <=> b[:end]) < 0 and (self.end <=> b[:start]) > 0
-    #     errors[:base] << "The room is already booked during this time"
-    #     break
-    #   end
-    # end
-    # TODO: This one would be better, but raises an sql syntax error
-    pp self
     existing_booking = Booking.where('"end" > :start AND start < :end AND room_id = :room', {
       start: self.start, end: self.end, room: self.room_id }).take
-    pp existing_booking
     errors[:base] << "The room is already booked during this time" if existing_booking
   end
 
