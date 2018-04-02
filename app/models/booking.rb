@@ -9,8 +9,8 @@ class Booking < ActiveRecord::Base
   validate :check_date_conflict
 
   def check_date_conflict
-    existing_booking = Booking.where('"end" > :start AND start < :end AND room_id = :room', {
-      start: self.start, end: self.end, room: self.room_id }).take
+    existing_booking = Booking.where('"end" > :start AND start < :end AND room_id = :room AND id != :id', {
+      start: self.start, end: self.end, room: self.room_id, id: self.id }).take
     errors[:base] << "The room is already booked during this time" if existing_booking
   end
 
