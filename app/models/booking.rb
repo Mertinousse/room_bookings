@@ -34,7 +34,7 @@ class Booking < ActiveRecord::Base
     # end
     # TODO: This one would be better, but raises an sql syntax error
     pp self
-    existing_booking = Booking.where("end > :start AND start < :end AND room_id = :room", {
+    existing_booking = Booking.where('"end" > :start AND start < :end AND room_id = :room', {
       start: self.start, end: self.end, room: self.room_id }).take
     pp existing_booking
     errors[:base] << "The room is already booked during this time" if existing_booking
