@@ -3,7 +3,7 @@ class CreateBookings < ActiveRecord::Migration[5.1]
     create_table :bookings do |t|
       t.belongs_to :room
 
-      t.string :room
+      t.integer :room_id
       t.date :start
       t.date :end
 
