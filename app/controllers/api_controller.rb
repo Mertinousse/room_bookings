@@ -6,12 +6,6 @@ class ApiController < ApplicationController
     if request_valid? then
       @data[:date] = Date.parse(@data[:date])
       @res = { :booked => false }
-      # Booking.all.each do |b|
-      #   if (b[:start] <=> @data[:date]) < 1 and (@data[:date] <=> b[:end]) < 0 then
-      #     @res[:booked] = true
-      #     break
-      #   end
-      # end
       existing_booking = Booking.where('"end" > :date AND start <= :date AND room_id = :room', {
         date: @data[:date], room: Room.find_by(number: @data[:room]) }).take
       @res[:booked] = true if existing_booking

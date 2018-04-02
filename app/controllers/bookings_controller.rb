@@ -1,7 +1,6 @@
 class BookingsController < ApplicationController
 
   before_action :set_booking, only: [ :destroy, :update, :edit ]
-  # before_action :set_rooms, only: [ :new, :update, :edit ]
 
   def index
     @bookings = Booking.all.sort_by &:start
@@ -48,9 +47,5 @@ class BookingsController < ApplicationController
   def set_booking
     @booking = Booking.find(params[:id])
   end
-
-  # def set_rooms
-  #   @rooms = Room.all
-  # end
 
 end
