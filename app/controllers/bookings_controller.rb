@@ -8,9 +8,8 @@ class BookingsController < ApplicationController
 
   def create
     @booking = Booking.new(booking_params)
-    @booking.room = Room.find(params[:booking][:room_id])
     if @booking.save
-      flash[:success] = "Booking has been created for room #{@booking.room.number}"
+      flash[:success] = "Booking has been created for room #{@booking.room}"
       redirect_to bookings_path
     else
       render "new"
@@ -19,14 +18,16 @@ class BookingsController < ApplicationController
 
   def new
     @booking = Booking.new
+    @room_select = true
   end
 
   def edit
+    @room_select = false
   end
 
   def update
     if @booking.update(booking_params)
-      flash[:success] = "Booking has been updated for room #{@booking.room.number}"
+      flash[:success] = "Booking has been updated for room #{@booking.room}"
       redirect_to bookings_path
     else
       render "edit"
@@ -41,7 +42,7 @@ class BookingsController < ApplicationController
 
   private
   def booking_params
-    params.require(:booking).permit(:start, :end)
+    params.require(:booking).permit(:room, :start, :end)
   end
 
   def set_booking
